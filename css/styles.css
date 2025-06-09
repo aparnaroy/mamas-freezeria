@@ -1,0 +1,760 @@
+body {
+	margin:0;
+}
+
+#window {
+    width: 100%;
+	height: 100vh;
+	background: black;
+	position: relative;
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	bottom: 0px;
+	overflow: hidden;
+	background: black;
+}
+
+#scale-window {
+	position: relative;
+	margin: auto;
+	width: 1770px;
+	height: 1000px;
+	border-radius: 5px;
+	transform-origin: top left;
+	box-sizing: content-box;
+	overflow: hidden;
+	background: rgb(249, 242, 228);
+}
+
+/* Add a black bar a few pixels from the top */
+.ticket-box::before {
+    content: "";
+    position: absolute;
+    top: 46px; 
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    z-index: 0;
+}
+
+.ticket-box {
+    width: 100%; /* Make the ticket box span the full width */
+    display: flex;
+    justify-content: space-around; /* Distribute tickets evenly */
+    align-items: center;
+    position: relative;
+    padding: 20px; /* Add some padding */
+    box-sizing: border-box;
+}
+
+.ticket .clothespin {
+    position: absolute;
+    top: -1px; /* To move the clothespin higher up */
+    left: 50%; /* Center the clothespin horizontally */
+    transform: translateX(-50%); /* Center the clothespin horizontally */
+    width: 15px;
+    z-index: 10; /* Ensure clothespin is above the ticket */
+}
+
+/* This is the container for the ticket. */
+.ticket {
+    flex: 1; /* Allow tickets to grow and fill the available space */
+    max-width: 220px; /* Increase the maximum width for the tickets */
+    height: 250px; /* Increase the height for the tickets */
+    position: relative; /* Make the ticket a positioned element */
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    margin: 0 10px; /* Add some margin between tickets */
+    z-index: 10;
+}
+
+.ticket:hover {
+    transform: scale(1.5) translateY(32px); /* Increase the scale factor */
+}
+
+.time-bar-shell {
+    width: 135px;
+    height: 15px;
+    background-color: #000000; /* Green color */
+    border-radius: 20px; /* Rounded corners */
+    box-sizing: border-box;
+    padding: 1px 1px 1px 1px;
+    margin-bottom: -8px; /* Add margin to the bottom */
+    display: flex;
+    justify-content: flex-end; /* Align the time-bar to the right */
+    position: absolute; /* Position it absolutely within the ticket */
+    bottom: 15px; /* Position it at the bottom of the ticket */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Center it horizontally */
+    z-index: 5; /* Ensure it is in front of the ticket image */
+    max-width: 100%; /* Constrain to the width of the parent div */
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.time-bar {
+    width: 100%; /* Setting time left */
+    height: 100%;
+    background-color: #88B954; /* Green color */
+    border-radius: 20px; /* Rounded corners */
+    box-sizing: border-box;
+}
+
+.ticket-images {
+    width: 100%;
+    height: 100%;
+    object-fit: fill; /* Ensure the image fills the entire div */
+    z-index: 2;
+}
+
+.holding-image {
+    position: absolute;
+    pointer-events: none; /* Make sure the image doesn't interfere with other elements */
+    z-index: 1000; /* Ensure the image is on top */
+    width: 50px; 
+    height: 50px; 
+}
+
+.cup .cup-ingredients {
+    position: absolute;
+    width: 50px;
+    height: 50px; 
+    bottom: 0; /* Default to bottom if no ice cream */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cup .cup-whipped-cream {
+    position: absolute;
+    width: 210px; 
+    height: 210px; 
+    top: -120px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 10;
+}
+
+.cup .cup-syrup{
+    position: absolute;
+    width: 210px; 
+    height: 210px; 
+    top: -120px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 11;
+}
+
+.cup .cup-ice-cream {
+    position: absolute;
+    width: 130px; 
+    height: 190px; 
+    bottom: 0px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 10;
+}
+
+.cup .cup-sprinkles {
+    position: absolute;
+    width: 130px; 
+    height: 190px; 
+    bottom: 60px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 10;
+}
+
+.cup .cup-ingredient {
+	position: absolute;
+	width: 90px; 
+	height: 90px; 
+	bottom: 120px;
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Center horizontally */
+	z-index: 10;
+}
+
+@keyframes fallDown {
+    from {
+        transform: translateX(-50%) translateY(-160px); /* Start 30px above */
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0); /* End at final position */
+        opacity: 1;
+    }
+}
+
+/* Update all ingredient classes to include the fallDown animation */
+.cup .cup-ingredients,
+.cup .cup-whipped-cream,
+.cup .cup-syrup,
+.cup .cup-ice-cream,
+.cup .cup-sprinkles,
+.cup .cup-ingredient {
+    position: absolute;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Start at final position but will animate from above */
+    animation: fallDown 0.5s ease-out;
+}
+
+/* .underlay-cup {
+    width: 190px;
+    height: 380px;
+    background: url('../img/cup.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+} */
+
+.iceCream-images {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 52px;
+    bottom: 0;
+    left: 90px;
+    right: 0;
+    z-index: 3;
+    object-fit: contain;
+}
+
+.ingredient1-images {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 90px;
+    bottom: 0;
+    left: 55px;
+    right: 0;
+    z-index: 3;
+    object-fit: contain;
+}
+
+.ingredient2-images {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 90px;
+    bottom: 0;
+    left: 125px;
+    right: 0;
+    z-index: 3;
+    object-fit: contain;
+}
+
+.topping1-images {
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    top: 165px;
+    bottom: 0;
+    left: 89px;
+    left: 89px;
+    right: 0;
+    z-index: 4;
+    object-fit: contain;
+}
+
+.topping2-images {
+    height: 50px;
+    width: 120px;
+    position: absolute;
+    top: 165px;
+    bottom: 0px;
+    left: 53px;
+    right: 0px;
+    z-index: 3;
+    object-fit: contain;
+}
+
+.blend-icon-images {
+    height: 110px;
+    width: 110px;
+    position: absolute;
+    top: 93px;
+    right: 0px;
+    left: 55px;
+    z-index: 3;
+    object-fit: contain;
+}
+
+@keyframes moveLeftRight {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); /* Distance ingredients move */
+    }
+}
+
+.ingredient-img {
+    animation: moveLeftRight 0.5s ease-in-out infinite;
+}
+
+/* animations for tickets sliding into screen */
+@keyframes ticketSlideIn {
+    from {
+        transform: translateX(700px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.ticket-slide-in {
+    animation-name: ticketSlideIn;
+    animation-duration: .5s;
+    animation-timing-function: ease-in;
+    animation-delay: 0;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: none;
+}
+
+.counter {
+    width: 100%;
+    padding-left: 100px; /* 100px from the left */
+    padding-right: 100px;
+    height: 600px;
+    background-color: #d8ecf0; /* Light blue color */
+    border-top-left-radius: 50% 100px;
+    border-top-right-radius: 50% 100px;
+    border: 8px solid #c0d0d5; /* Light gray border */
+    box-sizing: border-box;
+    position: absolute; /* Change to absolute positioning */
+    bottom: 0px; /* Position at the bottom of the parent */
+    left: 0; /* Ensure it spans the full width of the parent */
+    right: 0; /* Ensure it spans the full width of the parent */
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    flex-direction: row; /* Align children in a row */
+    z-index: 1; /* Ensure the counter is above the ticket */
+}
+
+.station {
+    width: 300px;
+    display: flex;
+    justify-content: center; /* Center children horizontally */
+    align-items: center;
+    position: relative; /* Ensure the element is positioned relatively */
+    z-index: 2;
+    top: 100px;
+}
+.station img {
+    /* width: 85%; */
+    /* height: auto; */
+	height: 300px;
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+}
+
+.cup {
+    bottom: 40px;
+	position: relative;
+	transition: transform 0.2s ease-in-out;
+}
+
+.cup:not(.blending):hover {
+	cursor: pointer;
+	transform: translateY(-25px); 
+}
+
+.cup.blending {
+	cursor: default;
+	transform: none;
+}
+
+/* Cup drop animation for when a new cup appears */
+@keyframes drop {
+    0% {
+        opacity: 0;
+		transform: translate(0, -100px); /* Start above */
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0); /* End at original position */
+    }
+}
+
+.cup.drop {
+    animation: drop 0.55s ease-out;
+}
+
+.platter {
+    position: absolute;
+	transform: scale(0.37);
+    top: 105px;
+	z-index: -10;
+}
+
+.blend-button {
+    position: absolute;
+    width: 75px !important;
+    height: 75px !important;
+    cursor: pointer;
+    z-index: 1; /* Ensure it's above other elements */
+    transition: transform 0.17s cubic-bezier(0.25, 0.1, 0.25, 1);
+    bottom: -30px; /* Position at the bottom of the station */
+}
+
+.blend-button:hover {
+    transform: scale(1); /* Maintain centering and scale */
+	filter: brightness(0.9); /* Slightly darken the button on hover */
+}
+
+.timer {
+    position: absolute; /* Position absolutely within the station */
+    width: 76px; /* Same size as blend button */
+    height: 76px; /* Same size as blend button */
+    z-index: 2; /* Ensure it's above the blend button */
+    bottom: -26px; /* Same position as blend button */
+    left: 55px; /* Center horizontally */
+    display: none; /* Hidden by default */
+    transition: transform 0.17s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.pie-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+#trash {
+	z-index: 3;
+	width: 100px;
+    /* height: 120px; */
+}
+
+#trash img {
+	position: absolute; /* Absolute positioning relative to the nearest positioned ancestor (body in this case) */
+	left: -41px;
+	transform: scale(0.56);
+	top: 110px;
+    z-index: 2;
+}
+
+#trash-droparea {
+	position: absolute;
+	width: 200px;
+	height: 450px;
+	left: 0px;
+	top: 250px;
+	z-index: 10;
+	opacity: 0;
+	visibility: hidden;
+}
+
+@keyframes pulse-trash-outline {
+	0% {
+	  transform: rotate(-90deg) scale(1.1) translate(-270px, -129px);
+	}
+	50% {
+	  transform: rotate(-90deg) scale(1.15) translate(-256px, -120px);
+	}
+	100% {
+	  transform: rotate(-90deg) scale(1.1) translate(-270px, -129px);
+	}
+}
+
+/* Makes the dashed outline move along the border */
+/* @keyframes dash {
+	to {
+		stroke-dashoffset: 1000;
+	}
+} */
+
+.trash-dashed-outline {
+	position: absolute;
+    left: -9px;
+    top: 110px;
+    transform: rotate(-90deg) scale(1.1) translate(-270px, -129px); /* Rotate the entire shape */
+	z-index: 5;
+	fill: rgba(255, 0, 0, 0.256); /* Light red transparent fill */
+    stroke: red; /* Red border */
+    stroke-width: 4; /* Border thickness */
+    stroke-dasharray: 6; /* Dashed border */
+	/* animation: dash 20s linear infinite; */
+	opacity: 0; /* Initially hidden */
+	animation: none; /* No animation initially */
+    transition: opacity 0.2s; /* Smooth transition for visibility */
+}
+
+#done {
+    z-index: 3;
+}
+
+#done img {
+	position: absolute; /* Absolute positioning relative to the nearest positioned ancestor (body in this case) */
+	right: -35px;
+	transform: scale(0.6);
+	top: 128px;
+    z-index: 2;
+}
+
+#done-droparea {
+	position: absolute;
+	width: 200px;
+	height: 450px;
+	right: 0px;
+	top: 250px;
+	z-index: 10;
+	opacity: 0;
+	visibility: hidden;
+}
+
+@keyframes pulse-done-outline {
+	0% {
+	  transform: rotate(90deg) scale(1.1) translate(-160px, -129px);
+	}
+	50% {
+	  transform: rotate(90deg) scale(1.15) translate(-150px, -120px);
+	}
+	100% {
+	  transform: rotate(90deg) scale(1.1) translate(-160px, -129px);
+	}
+}
+
+.done-dashed-outline {
+	position: absolute;
+	right: -9px;
+    top: 590px;
+    transform: rotate(90deg) scale(1.1) translate(-160px, -129px); /* Rotate the entire shape */
+	z-index: 3;
+	fill: rgba(0, 255, 34, 0.256); /* Light red transparent fill */
+    stroke: #169e3f; /* Red border */
+    stroke-width: 4; /* Border thickness */
+    stroke-dasharray: 6; /* Dashed border */
+	/* animation: pulse-done-outline 1.7s infinite; */
+	/* animation: dash 20s linear infinite; */
+	opacity: 0; /* Initially hidden */
+    animation: none; /* No animation initially */
+    transition: opacity 0.2s; /* Smooth transition for visibility */
+}
+
+.ingredients {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack the ingredients vertically */
+    align-items: center; /* Center them horizontally */
+    justify-content: center; /* Center them vertically */
+    margin-bottom: -40px;
+    gap: 20px; /* Add horizontal space between the ingredients */
+}
+
+.ingredient {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+}
+
+.ingredient img {
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 10px; /* Add some space between the ingredients */
+    align-items: center;
+	transition: transform 0.15s ease-in-out;
+}
+
+.ingredient img:hover {
+    transform: scale(1.1); /* Slightly enlarge the image on hover */
+}
+
+.top-ingredients {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    top: 10px;
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Place the ingredients at the center */
+    z-index: 1; /* Ensure it's above the other elements */
+}
+
+.top-ingredients img:hover {
+    transform: scale(1.1); /* Slightly enlarge the image on hover */
+    transition: transform 0.2s ease-in-out; /* Smooth transition for the transform property */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+
+.score {
+    width: 250px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    font-size: 50px;
+    font-weight: bold;
+    color: #000000;
+    z-index: 100;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+.missed-tickets {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #333;
+    margin-top: 0px;
+}
+
+.strike {
+    color: #ccc; /* Default color */
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 32px;
+}
+
+.strike.missed {
+    color: red; /* Color when active */
+}
+
+
+.red-x {
+    position: absolute; /* Position it over the ticket */
+    top: 20%;
+    left: 21.5%;
+    font-size: 8em;
+    color: red;
+    z-index: 7;
+    transition: opacity 0.5s ease; /* For smooth fade */
+    opacity: 0; /* Start invisible */
+}
+
+
+
+
+
+#scorePopupContainer {
+    position: fixed;
+    bottom: 185px;
+    right: 115px;
+    z-index: 1000;
+}
+
+.scorePopup {
+    position: absolute;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: green;
+    font-size: 35px;
+    opacity: 1;
+    transition: opacity 4s ease-in-out;
+    animation: moveUp 2s ease forwards;
+}
+
+@keyframes moveUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120px);
+        opacity: 0;
+    }
+}
+
+
+.game-over-popup {
+    display: none;   /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it is on top */
+}
+
+.game-over-content {
+    background-color: #ededed;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 540px;
+    width: 82%;
+    animation: fadeIn 0.5s ease-in-out; /* Add a fade-in animation */
+}
+
+.game-over-content h2 {
+    margin-top: 0;
+    font-size: 4em;
+    color: #be0404;
+}
+
+.game-over-content p {
+    font-size: 2.3em;
+    color: #424242;
+}
+
+.game-over-content button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.game-over-content button:hover {
+    background-color: #45a049;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Error message popup */
+#errorMessage {
+    position: fixed;
+    top: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 4px solid #f5c6cb;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#errorMessage.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+#errorMessage.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+
+.ingredient-img {
+    z-index: 5; /* Make sure they appear on top of the cup image */
+}

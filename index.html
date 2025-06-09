@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+  <title>Mama's Freezeria</title>
+  <link href="./css/start-style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <!-- Modal structure -->
+  <div id="window">
+    <!-- Scroll window is scaled to fit screen along with everything inside of it-->
+    <div id="scale-window">
+      <div id="howToModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>How To Play</h2>
+          <img id="how-to-play" src="./img/HowToPlay.png" alt="How to Play" />
+        </div>
+      </div>
+
+      <audio id="backgroundMusic" src="./audio/bgm.mp3" preload="auto" loop></audio>
+      <div class="start-screen">
+        <img src="./img/cover.webp" alt="Cover Image" class="cover-image" />
+        <h1>Mama's Freezeria</h1>
+        <h3>Aparna Roy, John Fulkerson, Emilie Barniak, Sneha Nangelimalil, Zonglin Wu</h3>
+        <h2> Click anywhere to start music</h2>
+        <button id="playButton">Play</button>
+        <button id="howToButton">How To Play</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // get music element
+    var backgroundMusic = document.getElementById("backgroundMusic");
+
+    // load music
+    window.addEventListener("load", function () {
+      backgroundMusic.muted = true;  // play with mute mode
+      backgroundMusic.play().then(function () {
+        console.log("Background music is playing silently.");
+      }).catch(function (error) {
+        console.log("Autoplay failed, waiting for user interaction.");
+      });
+    });
+
+    // click to unmute
+    document.body.addEventListener("click", function () {
+      if (backgroundMusic.muted) {
+        backgroundMusic.muted = false; // cancle mute
+        backgroundMusic.play().then(function () {
+          console.log("Background music playing after user interaction.");
+        }).catch(function (error) {
+          console.error("Failed to play music on user interaction:", error);
+        });
+      }
+    });
+
+    // click Play to swap page and music
+    document.getElementById("playButton").addEventListener("click", function () {
+      // swap music 
+      backgroundMusic.src = './audio/bgm2.mp3';
+      backgroundMusic.currentTime = 0; // start from begining
+      backgroundMusic.play();
+
+      localStorage.setItem('isMusicPlaying', 'true');
+      localStorage.setItem('currentTime', backgroundMusic.currentTime);
+
+      // switch page
+      window.location.href = "game.html";
+    });
+
+    const resize = () => {
+      const { innerWidth: width, innerHeight: height } = window;
+      const aspectRatio = 1770 / 1000;
+      let scale;
+
+      if (width / height > aspectRatio) {
+        scale = (height * aspectRatio) / 1770;
+      } else {
+        scale = width / 1770;
+      }
+
+      const scaleWindow = document.getElementById("scale-window");
+
+      if (scaleWindow) {
+        const { style, offsetWidth, offsetHeight } = scaleWindow;
+
+        style.transform = `scale(${scale})`;
+
+        // Center the scaleWindow
+        const scaleWindowWidth = offsetWidth * scale;
+        const scaleWindowHeight = offsetHeight * scale;
+        style.position = 'absolute';
+        style.left = `${(width - scaleWindowWidth) / 2}px`;
+        style.top = `${(height - scaleWindowHeight) / 2}px`;
+      }
+    };
+
+    // Handle resize events
+    window.addEventListener("resize", resize);
+
+    // Call resize initially
+    resize();
+  </script>
+  <script src="./js/modal.js"></script>
+</body>
+
+</html>

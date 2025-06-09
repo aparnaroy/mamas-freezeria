@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mama's Freezeria</title>
+  <link href="./css/styles.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+
+  <audio id="ticketSound" src="./audio/ding.mp3" preload="auto"></audio>
+  <audio id="trashSound" src="./audio/trash.mp3" preload="auto"></audio>
+  <audio id="scoreSound" src="./audio/money-sound.mp3" preload="auto"></audio>
+  <audio id="ingredientAddSound" src="./audio/drop.mp3" preload="auto"></audio>
+  <audio id="timeWarningSound" src="./audio/clock-tick.mp3" preload="auto"></audio>
+  <audio id="errorSound" src="./audio/error.mp3" preload="auto"></audio>
+  <audio id="ticketLosingSound" src="./audio/ticket-lost.mp3" preload="auto"></audio>
+  <audio id="blendSound" src="./audio/blender.mp3" preload="auto"></audio>
+  <audio id="gameOverSound" src="./audio/game-over.mp3" preload="auto"></audio>
+
+
+  <div id="window">
+    <!-- Scroll window is scaled to fit screen along with everything inside of it-->
+    <div id="scale-window">
+      <div id="game-over-popup" class="game-over-popup">
+        <div class="game-over-content">
+          <h2>Game Over</h2>
+          <p>Your Score: <span id="final-score"></span></p>
+          <p>Orders Completed: <span id="tickets-completed"></span></p>
+          <button id="play-again-button">Play Again</button>
+        </div>
+      </div>
+      
+      <div id="errorMessage"></div>
+
+      <audio id="backgroundMusic" src="./audio/bgm2.mp3" preload="auto" loop></audio>
+
+      <!--------------------------- Tickets --------------------------->
+      <div class="ticket-box">
+        <div id="ticketPlaceholder1" class="ticket"></div>
+        <div id="ticketPlaceholder2" class="ticket"></div>
+        <div id="ticketPlaceholder3" class="ticket"></div>
+        <div id="ticketPlaceholder4" class="ticket"></div>
+        <div id="ticketPlaceholder5" class="ticket"></div>
+        <div id="ticketPlaceholder6" class="ticket"></div>
+        <div id="ticketPlaceholder7" class="ticket"></div>
+      </div>
+
+      <!--------------------------- Trash --------------------------->
+      <div id="trash">
+        <img src="./img/trash.png" alt="Trash" />
+      </div>
+      <img id="trash-droparea" src="./img/trash.png" />
+      <div class="trash-dashed-outline">
+        <svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="0,10 408,10 370,110 55,110" />
+        </svg>
+      </div>
+
+      <!--------------------------- Done --------------------------->
+      <div id="done">
+        <img src="./img/done.png" alt="Done" />
+      </div>
+      <img id="done-droparea" src="./img/done.png" />
+      <div class="done-dashed-outline">
+        <svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="408,10 0,10 38,110 353,110" />
+        </svg>
+      </div>
+
+      <!--------------------------- Counter --------------------------->
+      <div class="counter">
+        <div class="ingredients">
+          <div class="ingredient choc-chips" data-draggable-ingredient="./img/ingredients/ChocChip.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/ChocChipContainer.png" alt="Chocolate Chips" />
+          </div>
+          <div class="ingredient sprinkles" data-draggable-ingredient="./img/ingredients/Sprinkles.png"
+            data-ingredient-type="sprinkles">
+            <img src="./img/ingredients/containers/SprinklesContainer.png" alt="Sprinkles" />
+          </div>
+        </div>
+
+        <div class="station">
+          <div id="cup1" class="cup" draggable="true">
+            <img alt="Milkshake Cup" src="./img/cup.png" draggable="false" />
+          </div>
+          <img class="platter" alt="Platter" src="./img/platter.png" />
+          <img id="blend-button1" class="blend-button" src="./img/blend-button.png" alt="Blend" />
+          <div id="timer1" class="timer">
+            <div id="pie-chart1" class="pie-chart"></div>
+          </div>
+        </div>
+
+        <div class="ingredients">
+          <div class="ingredient peanuts" data-draggable-ingredient="./img/ingredients/Peanut.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/PeanutContainer.png" alt="Peanuts" />
+          </div>
+          <div class="ingredient strawberries" data-draggable-ingredient="./img/ingredients/Strawberry.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/StrawberryContainer.png" alt="Strawberries" />
+          </div>
+        </div>
+
+        <div class="top-ingredients">
+          <div class="ingredient chocolate-syrup-bottle"
+            data-draggable-ingredient="./img/ingredients/ChocolateSyrup.png" data-ingredient-type="syrup">
+            <img src="./img/ingredients/containers/ChocolateSyrupBottle.png" alt="Chocolate Syrup" />
+          </div>
+          <div class="ingredient caramel-syrup-bottle" data-draggable-ingredient="./img/ingredients/CaramelSyrup.png"
+            data-ingredient-type="syrup">
+            <img src="./img/ingredients/containers/CaramelSyrupBottle.png" alt="Caramel Syrup" />
+          </div>
+          <div class="ingredient strawberry-syrup-bottle"
+            data-draggable-ingredient="./img/ingredients/StrawberrySyrup.png" data-ingredient-type="syrup">
+            <img src="./img/ingredients/containers/StrawberrySyrupBottle.png" alt="Strawberry Syrup" />
+          </div>
+          <div class="ingredient whipped-cream-can" data-draggable-ingredient="./img/ingredients/WhippedCream.png"
+            data-ingredient-type="whipped-cream">
+            <img src="./img/ingredients/containers/WhippedCreamCan.png" alt="Whipped Cream" />
+          </div>
+          <div class="ingredient vanilla-ice" data-draggable-ingredient="./img/ingredients/VanillaIceCream.png"
+            t="./img/ingredients/VanillaIceCream.png" data-ingredient-type="ice-cream">
+            <img src="./img/ingredients/containers/VanIceCreamTub.png" alt="Vanilla Ice Cream" />
+          </div>
+          <div class="ingredient choc-ice" data-draggable-ingredient="./img/ingredients/ChocolateIceCream.png"
+            data-ingredient-type="ice-cream">
+            <img src="./img/ingredients/containers/ChocIceCreamTub.png" alt="Chocolate Ice Cream" />
+          </div>
+        </div>
+
+        <div class="station">
+          <div id="cup2" class="cup" draggable="true">
+            <img alt="Milkshake Cup" src="./img/cup.png" draggable="false" />
+          </div>
+          <img class="platter" alt="Platter" src="./img/platter.png" />
+          <img id="blend-button2" class="blend-button" src="./img/blend-button.png" alt="Blend" />
+          <div id="timer2" class="timer">
+            <div id="pie-chart2" class="pie-chart"></div>
+          </div>
+        </div>
+
+        <div class="ingredients">
+          <div class="ingredient blueberries" data-draggable-ingredient="./img/ingredients/Blueberry.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/BlueberryContainer.png" alt="Blueberries" />
+          </div>
+          <div class="ingredient oreos" data-draggable-ingredient="./img/ingredients/Oreo.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/OreoContainer.png" alt="Oreos" />
+          </div>
+        </div>
+
+        <div class="station">
+          <div id="cup3" class="cup" draggable="true">
+            <img alt="Milkshake Cup" src="./img/cup.png" draggable="false" />
+          </div>
+          <img class="platter" alt="Platter" src="./img/platter.png" />
+          <img id="blend-button3" class="blend-button" src="./img/blend-button.png" alt="Blend" />
+          <div id="timer3" class="timer">
+            <div id="pie-chart3" class="pie-chart"></div>
+          </div>
+        </div>
+
+        <div class="ingredients">
+          <div class="ingredient gummy-worms" data-draggable-ingredient="./img/ingredients/GummyWorm.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/GummyWormContainer.png" alt="Gummy Worms" />
+          </div>
+          <div class="ingredient cherries" data-draggable-ingredient="./img/ingredients/Cherry.png"
+            data-ingredient-type="ingredient">
+            <img src="./img/ingredients/containers/CherryContainer.png" alt="Cherries" />
+          </div>
+        </div>
+      </div>
+
+      <!--------------------------- Score --------------------------->
+      <div id="scorePopupContainer"></div>
+
+      <div class="score">
+        <div class="score-text">Score: <span id="score">0</span></div>
+        <div class="missed-tickets">
+          Missed Tickets:
+          <span id="missed-tickets">
+            <span class="strike" id="strike-1">X</span>
+            <span class="strike" id="strike-2">X</span>
+            <span class="strike" id="strike-3">X</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="js/game.js"></script>
+  <script type="module" src="./js/ticket-generation.js"></script>
+  <script type="module" src="./js/cup-ingredients-animate.js"></script>
+  <script type="module" src="./js/blend.js"></script>
+  <script src="./js/music.js"></script>
+</body>
+
+</html>
