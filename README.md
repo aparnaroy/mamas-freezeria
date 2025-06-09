@@ -1,6 +1,6 @@
 # Mama's Freezeria
 
-<img width="952" alt="mamas-freezeria-screenshot" src="https://github.com/user-attachments/assets/334b601a-c327-4d7e-9a6b-f31219c2ae26" />
+<img width="1022" alt="Screenshot 2025-06-09 at 9 49 27 AM" src="https://github.com/user-attachments/assets/7f927f5b-76b8-47b2-a2d2-2e60bc5f262e" />
 
 ## Inspiration
 
