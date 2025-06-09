@@ -15,11 +15,13 @@ We all love the CoolMathGames game Papa’s Freezeria, so we decided to create o
 
 ## How It Works
 
-In this game, you'll receive orders in the form of tickets, and your goal is to create the requested milkshakes by dragging and dropping ingredients into the cups. Each successful milkshake earns you points, and as you progress, the difficulty ramps up. With each order comes a time limit, and if you miss 3 orders, it's game over. How many orders can you complete before time runs out? Play today to test your milkshake-making skills!
+In this game, you'll receive orders in the form of tickets, and your goal is to create the requested milkshakes by dragging and dropping ingredients into the cups. Each successful milkshake earns you points, and as you progress, the difficulty ramps up. With each order comes a time limit, and if you miss 3 orders, it's game over. 
+
+How many orders can you complete before time runs out? Play today to test your milkshake-making skills!
 
 ## How We Built It
 
-We used stuck to the basics to create this game:
+We stuck to the basics to create this game:
 
 - JavaScript
 - CSS and jQuery (to animate the game)
