@@ -1,21 +1,30 @@
 # Mama's Freezeria
 
-## Notes
+<img width="952" alt="mamas-freezeria-screenshot" src="https://github.com/user-attachments/assets/334b601a-c327-4d7e-9a6b-f31219c2ae26" />
 
-This project template contains a simple example of using jquery on a page. You do not have to use any of it, but it is a good way to get started.
+## Inspiration
 
-In this example code:
+We all love the CoolMathGames game Papa’s Freezeria, so we decided to create our own version of it!
 
-- Jquery is loaded in the head of the html document
-- A link to the `css/styles.css` file is included in the head of the html document.
-- Some simple styles are included in `css/styles.css`
-- The file `js/main.js` contains javascript code that makes the site interactive.
-- The image folder holds the images used in the example.
+## The Team
+- Aparna Roy
+- John Fulkerson
+- Emilie Barniak
+- Sneha Nangelimalil
+- Zonglin Wu
 
-There is also a .vscode folder which is set up to enable debugging.
+## How It Works
 
-## Getting started
+In this game, you'll receive orders in the form of tickets, and your goal is to create the requested milkshakes by dragging and dropping ingredients into the cups. Each successful milkshake earns you points, and as you progress, the difficulty ramps up. With each order comes a time limit, and if you miss 3 orders, it's game over. How many orders can you complete before time runs out? Play today to test your milkshake-making skills!
 
-After reviewing the example, you should replace most or all of the example with your code. I don't want everyone using the same background or buttons style. Be creative.
+## How We Built It
 
-I recommend this structure with folders for img, js, and css as it keeps the project nice and organized, but otherwise, you should replace all of the content with your own.
+We used stuck to the basics to create this game:
+
+- JavaScript
+- CSS and jQuery (to animate the game)
+- HTML
+
+## Try It Out:
+
+https://ud-cisc474.github.io/cisc474-project1-group-3
